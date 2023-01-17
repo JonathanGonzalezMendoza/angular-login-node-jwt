@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  uri = 'https://localhost:3000/api';
-  token: any = "";
+  private uri = 'http://localhost:3000/api';
+  private token: any = "";
+  errorMessage: string = "";
+
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -16,15 +18,21 @@ export class AuthService {
     this.http.post(this.uri + '/authenticate', customerData).subscribe((resp: any) => {
       this.router.navigate(['profile']);
       localStorage.setItem('auth_token', resp.token);
+    },(err: HttpErrorResponse) => {
+      if(err.error instanceof Error) {
+        this.errorMessage = "Ocurrio un error inesperado del lado del Cliente";
+      } else {
+        this.errorMessage = err.error.errorMessage;
+      }
     });
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('auth_token');
   }
 
   public get logIn(): boolean {
-    return (localStorage.getItem('token') !== null);
+    return (localStorage.getItem('auth_token') !== null);
   }
 
 }

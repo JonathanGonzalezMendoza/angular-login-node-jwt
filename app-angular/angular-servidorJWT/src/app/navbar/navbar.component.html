@@ -1,13 +1,24 @@
-<div style="text-align:center">
-    <ul>
-        <li><a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>  </li>
-        <li><a class="nav-link" routerLink="profile" routerLinkActive="active" *ngIf="authServices">Profile</a>  </li>
-        <li style="float:right" > <a class="nav-link"  style="float:right" routerLink="login" routerLinkActive="active" *ngIf="!authServices">Login</a> </li>
-        <li style="float:right" > <a class ="nav-link" (click)="logout()" href="#" *ngIf="authServices">Logout</a>  </li>
-    </ul>
-    <div class="text-center">
-        <p>
-        Angular 6 Authentication with JWT Tutorial
-        </p>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="profile" *ngIf="authServices">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="login" *ngIf="!authServices">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" (click)="logout()" routerLink="" *ngIf="authServices">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
-</div>
+  </nav>

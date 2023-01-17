@@ -7,9 +7,10 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   checkoutForm;
+  errorMessage: string = "";
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {
     this.checkoutForm = this.formBuilder.group({
@@ -18,19 +19,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /*Login() {
-    console.log("You are logging in");
-    this.authService.login(this.email, this.password);
-  }*/
-
   onSubmit(customerData: any) {
     this.authService.login(customerData);
+    this.errorMessage = "Ocurrio un error inesperado";
     this.checkoutForm.reset();
-    console.warn('Your order has been submitted', customerData);
-  }
-
-  ngOnInit(): void {
-    
   }
 
 }

@@ -20,8 +20,9 @@ const users = {
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.text());
-app.use(express.json());
+//app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Puerto en el que se va a ejecutar el servidor
@@ -32,6 +33,9 @@ const port = process.env.PORT || 3000;
 
 router.post('/authenticate', (req, res) => {
     if(req.body) {
+      console.log(req.body);
+      console.log(req.body.email);
+      console.log(req.body.password);
         const user = req.body;
         if (users.email===req.body.email && users.password === req.body.password) {
             const token = jwt.sign(user, JWT_Secret);
@@ -40,8 +44,8 @@ router.post('/authenticate', (req, res) => {
               token: token
             });
           } else {
-            res.status(403).send({
-              errorMessage: 'Authorization required!'
+            res.status(401).send({
+              errorMessage: 'Email/Password are incorrect, please try again'
             });
           }
     } else {
