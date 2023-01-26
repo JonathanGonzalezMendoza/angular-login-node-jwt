@@ -3,3 +3,7 @@ svg {
     height: 100px;
     margin-bottom: 1rem;
 }
+
+#errorForm {
+    color: brown;
+}

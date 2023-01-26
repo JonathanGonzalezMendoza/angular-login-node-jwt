@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  checkoutForm;
+  checkoutForm: any = FormGroup;
   errorMessage: string = "";
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
-    this.checkoutForm = this.formBuilder.group({
-      email: '',
-      password: ''
+  constructor(private authService: AuthService, private fb: FormBuilder) {
+  }
+
+  ngOnInit(): void {
+    this.checkoutForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 

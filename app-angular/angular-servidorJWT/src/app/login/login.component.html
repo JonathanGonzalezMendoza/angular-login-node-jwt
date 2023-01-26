@@ -8,8 +8,11 @@
       <div class="card-body" *ngIf="errorMessage !== ''">
         {{ errorMessage }}
       </div>
+      <div class="error" id="errorForm" *ngIf="(checkoutForm.get('email').hasError('required') && checkoutForm.get('email').touched) || (checkoutForm.get('password').hasError('required') && checkoutForm.get('password').touched)">
+        You must fill in all the fields
+      </div>
       <div class="card-body">
-        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+        <form novalidate [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>
             <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email">
@@ -19,7 +22,7 @@
             <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
           </div>
           <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="submit" [disabled]="checkoutForm.invalid" class="btn btn-success">Sign in</button>
           </div>
         </form>
       </div>

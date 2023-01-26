@@ -14,6 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router:Router) { }
 
+  // Metodo Login: Consulta la el servicio de autenticacion para validar los datos de usuario gauardados en la Base de Datos
+
   login(customerData: any) {
     this.http.post(this.uri + '/authenticate', customerData).subscribe((resp: any) => {
       this.router.navigate(['profile']);
@@ -26,6 +28,10 @@ export class AuthService {
       }
     });
   }
+
+  // Metodo Registro: Consulta el servicio de guardado del servidor para almacenar el registro creado
+   // [ You Code ]
+
 
   logout() {
     localStorage.removeItem('auth_token');

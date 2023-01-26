@@ -7,13 +7,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/">Home</a>
+            <a class="nav-link active" routerLink="/" *ngIf="!authServices">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" routerLink="profile" *ngIf="authServices">Profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" routerLink="login" *ngIf="!authServices">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="register" *ngIf="!authServices">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" (click)="logout()" routerLink="" *ngIf="authServices">Logout</a>
